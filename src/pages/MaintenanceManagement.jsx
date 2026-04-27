@@ -310,12 +310,12 @@ function EquipmentDetailPanel({ item, onClose }) {
     const currentYear = 2026;
     const purchaseYear = parseInt(eqData.purchaseDate.split('-')[0]);
     const age = currentYear - purchaseYear;
-    
+
     // Factors: Age (weight 30), Reliability (weight 40), Repair Count (weight 30)
     const ageFactor = Math.min((age / 12) * 30, 30); // 12 years assumed life
     const reliabilityFactor = ((100 - eqData.availability) / 100) * 40;
     const repairFactor = Math.min((eqData.totalRepairs / 8) * 30, 30); // 8 repairs = critical
-    
+
     return Math.round(ageFactor + reliabilityFactor + repairFactor);
   };
 
@@ -472,7 +472,7 @@ function EquipmentDetailPanel({ item, onClose }) {
                 <span className={`text-xl font-black ${status.color}`}>{retirementScore}%</span>
               </div>
               <div className="h-3 w-full bg-white/50 rounded-full overflow-hidden mb-4 border border-black/5">
-                <div 
+                <div
                   className={`h-full transition-all duration-1000 ${retirementScore > 70 ? 'bg-red-500' : retirementScore > 40 ? 'bg-amber-500' : 'bg-emerald-500'}`}
                   style={{ width: `${retirementScore}%` }}
                 />
@@ -482,7 +482,7 @@ function EquipmentDetailPanel({ item, onClose }) {
                 <span className={`text-xs font-black uppercase tracking-tight ${status.color}`}>{status.label}</span>
               </div>
               <p className="text-[10px] text-slate-600 mt-2 leading-relaxed italic">
-                *Score calculated based on equipment age ({2026 - parseInt(eqData?.purchaseDate?.split('-')[0]) || 0} yrs), 
+                *Score calculated based on equipment age ({2026 - parseInt(eqData?.purchaseDate?.split('-')[0]) || 0} yrs),
                 cumulative failure rate, and total repair frequency.
               </p>
             </div>
@@ -779,7 +779,7 @@ function EditEntryModal({ isOpen, onClose, onUpdate, item, equipmentList }) {
             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Technician</label>
             <select
               value={formData.assignedTo}
-              onChange={(e) => setFormData({...formData, assignedTo: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, assignedTo: e.target.value })}
               className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/20"
             >
               <option value="Ahmed K.">Ahmed K.</option>
@@ -793,7 +793,7 @@ function EditEntryModal({ isOpen, onClose, onUpdate, item, equipmentList }) {
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Priority</label>
               <select
                 value={formData.priority}
-                onChange={(e) => setFormData({...formData, priority: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/20"
               >
                 <option value="High">High</option>
@@ -806,7 +806,7 @@ function EditEntryModal({ isOpen, onClose, onUpdate, item, equipmentList }) {
               <input
                 type="number"
                 value={formData.laborHours}
-                onChange={(e) => setFormData({...formData, laborHours: parseFloat(e.target.value)})}
+                onChange={(e) => setFormData({ ...formData, laborHours: parseFloat(e.target.value) })}
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
@@ -1494,7 +1494,7 @@ export default function MaintenanceManagement() {
           </div>
 
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 shadow-sm print:hidden">
-            <h4 className="text-[10px] uppercase font-bold text-amber-600 tracking-widest mb-2">Lecture Note</h4>
+            <h4 className="text-[10px] uppercase font-bold text-amber-600 tracking-widest mb-2">Note</h4>
             <p className="text-xs text-amber-800 leading-relaxed">
               Medical equipment repair costs should ideally not exceed 25% of the equipment's original acquisition cost per year. High λ (failure rate) devices are prime candidates for replacement.
             </p>
@@ -1510,7 +1510,7 @@ export default function MaintenanceManagement() {
         onAdd={handleAddEntry}
         equipmentList={equipment}
       />
-      <EditEntryModal 
+      <EditEntryModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         onUpdate={handleUpdateEntry}
