@@ -57,7 +57,7 @@ export default function EquipmentInventory() {
 
       {/* Section B — Formulas Reference Card */}
       <div className="bg-slate-900 text-white rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-white mb-4">📐 Efficiency Indicator Formulas (SBEG202 Lecture)</h3>
+        <h3 className="text-sm font-semibold text-white mb-4">📐 Efficiency Indicator Formulas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {formulas.map((f, i) => (
             <div key={i} className="border-l-2 border-teal-400 pl-4 py-1">

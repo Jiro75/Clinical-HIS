@@ -34,15 +34,15 @@ function generateExponentialData() {
 }
 
 const bathtubData = generateBathtubData();
-const expData     = generateExponentialData();
+const expData = generateExponentialData();
 
 // ─── Compute Program Indicators ───────────────────────────────────────────────
 
 function computeProgramIndicators() {
   const ipmRate = kpiSummary.ipmCompletionRate;
 
-  const completedWOs  = workOrders.filter(wo => wo.status === 'Completed');
-  const within24h     = completedWOs.filter(wo => wo.daysOpen === 0);
+  const completedWOs = workOrders.filter(wo => wo.status === 'Completed');
+  const within24h = completedWOs.filter(wo => wo.daysOpen === 0);
   const repair24hRate = completedWOs.length > 0
     ? Math.round((within24h.length / completedWOs.length) * 100)
     : 0;
@@ -64,7 +64,7 @@ function computeProgramIndicators() {
       completedCorrectiveEquipment.includes(wo.equipment)
   );
   const totalCorrective = workOrders.filter(wo => wo.type === 'Corrective').length;
-  const callbackRate    = totalCorrective > 0
+  const callbackRate = totalCorrective > 0
     ? Math.round((callbackWOs.length / totalCorrective) * 100)
     : 0;
 
@@ -128,35 +128,35 @@ const programIndicators = [
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const colorMap = {
-  teal:   { bg: 'bg-teal-50',   border: 'border-teal-200',   text: 'text-teal-700',   badge: 'bg-teal-100 text-teal-700',     bar: '#0D9488' },
-  blue:   { bg: 'bg-blue-50',   border: 'border-blue-200',   text: 'text-blue-700',   badge: 'bg-blue-100 text-blue-700',     bar: '#2563EB' },
-  amber:  { bg: 'bg-amber-50',  border: 'border-amber-200',  text: 'text-amber-700',  badge: 'bg-amber-100 text-amber-700',   bar: '#D97706' },
-  green:  { bg: 'bg-green-50',  border: 'border-green-200',  text: 'text-green-700',  badge: 'bg-green-100 text-green-700',   bar: '#16A34A' },
-  red:    { bg: 'bg-red-50',    border: 'border-red-200',    text: 'text-red-700',    badge: 'bg-red-100 text-red-700',       bar: '#DC2626' },
+  teal: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', badge: 'bg-teal-100 text-teal-700', bar: '#0D9488' },
+  blue: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700', badge: 'bg-blue-100 text-blue-700', bar: '#2563EB' },
+  amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', badge: 'bg-amber-100 text-amber-700', bar: '#D97706' },
+  green: { bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-700', badge: 'bg-green-100 text-green-700', bar: '#16A34A' },
+  red: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-700', badge: 'bg-red-100 text-red-700', bar: '#DC2626' },
   purple: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-700', bar: '#7C3AED' },
 };
 
 function getIndicatorStatus(ind) {
   if (ind.direction === 'higher-is-better') {
-    if (ind.value >= ind.target)    return { label: '✅ On Target',          cls: 'bg-green-100 text-green-700' };
-    if (ind.value >= ind.threshold) return { label: '⚠️ Below Target',      cls: 'bg-amber-100 text-amber-700' };
-    return                                 { label: '🔴 Threshold Breached', cls: 'bg-red-100 text-red-700'    };
+    if (ind.value >= ind.target) return { label: '✅ On Target', cls: 'bg-green-100 text-green-700' };
+    if (ind.value >= ind.threshold) return { label: '⚠️ Below Target', cls: 'bg-amber-100 text-amber-700' };
+    return { label: '🔴 Threshold Breached', cls: 'bg-red-100 text-red-700' };
   } else {
-    if (ind.value <= ind.target)    return { label: '✅ On Target',          cls: 'bg-green-100 text-green-700' };
-    if (ind.value <= ind.threshold) return { label: '⚠️ Near Threshold',    cls: 'bg-amber-100 text-amber-700' };
-    return                                 { label: '🔴 Threshold Breached', cls: 'bg-red-100 text-red-700'    };
+    if (ind.value <= ind.target) return { label: '✅ On Target', cls: 'bg-green-100 text-green-700' };
+    if (ind.value <= ind.threshold) return { label: '⚠️ Near Threshold', cls: 'bg-amber-100 text-amber-700' };
+    return { label: '🔴 Threshold Breached', cls: 'bg-red-100 text-red-700' };
   }
 }
 
 const getRiskLevel = (failureRate) => {
-  if (failureRate > 0.15)  return { label: 'High Risk',     color: 'bg-red-100 text-red-700'     };
+  if (failureRate > 0.15) return { label: 'High Risk', color: 'bg-red-100 text-red-700' };
   if (failureRate >= 0.05) return { label: 'Moderate Risk', color: 'bg-amber-100 text-amber-700' };
-  return                          { label: 'Low Risk',      color: 'bg-green-100 text-green-700' };
+  return { label: 'Low Risk', color: 'bg-green-100 text-green-700' };
 };
 
 const getMaintenanceColor = (level) => {
   if (level === 'Organizational') return 'bg-blue-100 text-blue-700';
-  if (level === 'Intermediate')   return 'bg-amber-100 text-amber-700';
+  if (level === 'Intermediate') return 'bg-amber-100 text-amber-700';
   return 'bg-red-100 text-red-700';
 };
 
@@ -174,14 +174,14 @@ export default function ReliabilityAnalysis() {
   // is mid-typing (e.g. clearing to type a new number). We only parse to a
   // number at calculation time, falling back to 1 / 0 so no NaN propagates.
   const [muStr, setMuStr] = useState('8000');
-  const [tStr,  setTStr]  = useState('7000');
+  const [tStr, setTStr] = useState('7000');
 
-  const mu = Math.max(1,  parseFloat(muStr) || 1);
-  const t  = Math.max(0,  parseFloat(tStr)  || 0);
+  const mu = Math.max(1, parseFloat(muStr) || 1);
+  const t = Math.max(0, parseFloat(tStr) || 0);
 
-  const Ft   = parseFloat((1 - Math.exp(-t / mu)).toFixed(4));
-  const Rt   = parseFloat((Math.exp(-t / mu)).toFixed(4));
-  const Ht   = parseFloat((1 / mu).toFixed(6));
+  const Ft = parseFloat((1 - Math.exp(-t / mu)).toFixed(4));
+  const Rt = parseFloat((Math.exp(-t / mu)).toFixed(4));
+  const Ht = parseFloat((1 / mu).toFixed(6));
   const mtbf = mu;
 
   const ranked = [...equipment].sort((a, b) => b.failureRate - a.failureRate);
@@ -202,7 +202,7 @@ export default function ReliabilityAnalysis() {
 
       {/* ── Core Reliability Formulas ────────────────────────────────────────── */}
       <div className="bg-slate-900 text-white rounded-xl p-6">
-        <h2 className="text-white font-semibold text-base mb-4">📐 Core Reliability Formulas (SBEG202 Lecture)</h2>
+        <h2 className="text-white font-semibold text-base mb-4">📐 Core Reliability Formulas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="border-l-2 border-teal-400 pl-4">
             <div className="text-slate-400 text-xs uppercase tracking-wider mb-1">F(t) — Cumulative Failure Distribution</div>
@@ -241,7 +241,7 @@ export default function ReliabilityAnalysis() {
               <YAxis label={{ value: 'H(t)', angle: -90, position: 'insideLeft', fontSize: 11 }} tick={{ fontSize: 11 }} />
               <Tooltip contentStyle={{ fontSize: 12 }} />
               <ReferenceLine x={20} stroke="#16A34A" strokeDasharray="5 5" label={{ value: 'Useful Life →', position: 'top', fontSize: 10, fill: '#16A34A' }} />
-              <ReferenceLine x={70} stroke="#DC2626" strokeDasharray="5 5" label={{ value: '← Wear-out',   position: 'top', fontSize: 10, fill: '#DC2626' }} />
+              <ReferenceLine x={70} stroke="#DC2626" strokeDasharray="5 5" label={{ value: '← Wear-out', position: 'top', fontSize: 10, fill: '#DC2626' }} />
               <Line type="monotone" dataKey="ht" stroke="#0D9488" strokeWidth={2.5} dot={false} name="H(t)" />
             </LineChart>
           </ResponsiveContainer>
@@ -263,9 +263,9 @@ export default function ReliabilityAnalysis() {
               <YAxis label={{ value: 'f(t)', angle: -90, position: 'insideLeft', fontSize: 11 }} tick={{ fontSize: 11 }} />
               <Tooltip contentStyle={{ fontSize: 12 }} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="mu20"  stroke="#DC2626" strokeWidth={2} dot={false} name="μ=20h (Short Life)"  />
-              <Line type="monotone" dataKey="mu50"  stroke="#D97706" strokeWidth={2} dot={false} name="μ=50h (Medium Life)" />
-              <Line type="monotone" dataKey="mu100" stroke="#16A34A" strokeWidth={2} dot={false} name="μ=100h (Long Life)"  />
+              <Line type="monotone" dataKey="mu20" stroke="#DC2626" strokeWidth={2} dot={false} name="μ=20h (Short Life)" />
+              <Line type="monotone" dataKey="mu50" stroke="#D97706" strokeWidth={2} dot={false} name="μ=50h (Medium Life)" />
+              <Line type="monotone" dataKey="mu100" stroke="#16A34A" strokeWidth={2} dot={false} name="μ=100h (Long Life)" />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -417,9 +417,9 @@ export default function ReliabilityAnalysis() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {programIndicators.map((ind) => {
             const status = getIndicatorStatus(ind);
-            const c      = colorMap[ind.color];
-            const Icon   = ind.icon;
-            const pct    = ind.type === 'rate'
+            const c = colorMap[ind.color];
+            const Icon = ind.icon;
+            const pct = ind.type === 'rate'
               ? Math.min(ind.value, 100)
               : Math.min((ind.value / (ind.threshold * 2)) * 100, 100);
 
@@ -536,9 +536,9 @@ export default function ReliabilityAnalysis() {
             </thead>
             <tbody>
               {ranked.slice(0, 10).map((item, index) => {
-                const risk             = getRiskLevel(item.failureRate);
+                const risk = getRiskLevel(item.failureRate);
                 const maintenanceColor = getMaintenanceColor(item.maintenanceLevel);
-                const isTopThree       = index < 3;
+                const isTopThree = index < 3;
                 return (
                   <tr key={item.id}
                     className={`border-b border-slate-200 ${isTopThree ? 'bg-red-50' : 'hover:bg-teal-50'}`}>
